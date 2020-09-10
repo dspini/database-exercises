@@ -12,7 +12,6 @@ FROM employees as e
 WHERE dm.to_date > curdate()
 ORDER BY d.dept_name;
 
-
 # 3.
 SELECT
     d.dept_name as 'Department Name',
@@ -35,7 +34,6 @@ WHERE
         d.dept_name = 'Customer Service' AND
         de.to_date > curdate()
 GROUP BY titles.title;
-
 
 # 5.
 SELECT
