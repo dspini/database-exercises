@@ -1,8 +1,7 @@
 USE employees;
 
 # 2.
-SELECT
-    d.dept_name as 'Department Name',
+SELECT d.dept_name as 'Department Name',
     CONCAT(e.first_name, ' ', e.last_name) AS 'Department Manager'
 FROM employees as e
          JOIN dept_manager as dm
@@ -13,8 +12,7 @@ WHERE dm.to_date > curdate()
 ORDER BY d.dept_name;
 
 # 3.
-SELECT
-    d.dept_name as 'Department Name',
+SELECT d.dept_name as 'Department Name',
     CONCAT(e.first_name, ' ', e.last_name) AS 'Department Manager'
 FROM employees as e
          JOIN dept_manager as dm
@@ -36,8 +34,7 @@ WHERE
 GROUP BY titles.title;
 
 # 5.
-SELECT
-    d.dept_name as 'Department Name',
+SELECT d.dept_name as 'Department Name',
     CONCAT(e.first_name, ' ', e.last_name) AS 'Department Manager',
     s.salary as Salary
 FROM employees as e
@@ -49,4 +46,19 @@ FROM employees as e
               ON e.emp_no = s.emp_no
 WHERE dm.to_date > curdate() AND
         s.to_date > curdate()
+ORDER BY d.dept_name;
+
+# Bonus
+SELECT d.dept_name, e.first_name, e.last_name, mgmt.first_name, mgmt.last_name
+FROM employees as e
+         JOIN dept_emp de
+              ON e.emp_no = de.emp_no
+         JOIN departments d
+              ON de.dept_no = d.dept_no
+         JOIN dept_manager manager
+              ON d.dept_no = manager.dept_no
+         JOIN employees mgmt
+              ON manager.emp_no = mgmt.emp_no
+WHERE de.to_date > curdate()
+  AND manager.to_date > curdate()
 ORDER BY d.dept_name;
